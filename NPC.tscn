@@ -1,0 +1,148 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Kislany.gd" type="Script" id=1]
+[ext_resource path="res://kislany_nevet2.png" type="Texture" id=2]
+[ext_resource path="res://kislany_setal.png" type="Texture" id=3]
+[ext_resource path="res://kislany_nevet_szemben.png" type="Texture" id=4]
+[ext_resource path="res://kislany_nevet_szemben2.png" type="Texture" id=5]
+[ext_resource path="res://boltos1.png" type="Texture" id=6]
+[ext_resource path="res://boltos_beszel2.png" type="Texture" id=7]
+[ext_resource path="res://boltos2.png" type="Texture" id=8]
+[ext_resource path="res://boltos_beszel1.png" type="Texture" id=9]
+[ext_resource path="res://boltos_beszel4.png" type="Texture" id=10]
+[ext_resource path="res://Boltos.gd" type="Script" id=11]
+[ext_resource path="res://A_Masik_hallgat_1.png" type="Texture" id=12]
+[ext_resource path="res://A_Masik_beszel3.png" type="Texture" id=13]
+[ext_resource path="res://A_Masik_hallgat3.png" type="Texture" id=14]
+[ext_resource path="res://A_Masik_hallgat2.png" type="Texture" id=15]
+[ext_resource path="res://A_Masik_beszel1.png" type="Texture" id=16]
+[ext_resource path="res://A_Masik_beszel2.png" type="Texture" id=17]
+[ext_resource path="res://Festo.gd" type="Script" id=18]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "speak",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "stay",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23, 22.1546 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "speak",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "stay",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8.22723, 11.0044 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "speak",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "stay",
+"speed": 1.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 9.78992, 13.6658 )
+
+[node name="NPC" type="Node2D"]
+
+[node name="Kislany" type="KinematicBody2D" parent="."]
+pause_mode = 2
+position = Vector2( 494.282, 269.365 )
+z_index = 1
+collision_layer = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Kislany"]
+frames = SubResource( 1 )
+animation = "stay"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kislany"]
+position = Vector2( -1.41467, 20.5396 )
+shape = SubResource( 2 )
+
+[node name="Boltos" type="KinematicBody2D" parent="."]
+pause_mode = 2
+position = Vector2( 319.771, 243.147 )
+scale = Vector2( 2, 2 )
+z_index = 1
+collision_layer = 5
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Boltos"]
+frames = SubResource( 3 )
+animation = "stay"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boltos"]
+position = Vector2( -1.59144, 15.5898 )
+shape = SubResource( 4 )
+
+[node name="Festo" type="KinematicBody2D" parent="."]
+pause_mode = 2
+position = Vector2( 1103.39, 670.164 )
+scale = Vector2( 2, 2 )
+z_index = 1
+collision_layer = 5
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Festo"]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 5 )
+animation = "stay"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Festo"]
+position = Vector2( -0.884317, 13.2917 )
+shape = SubResource( 6 )

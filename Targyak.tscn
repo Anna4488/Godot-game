@@ -1,0 +1,146 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Kocka.gd" type="Script" id=1]
+[ext_resource path="res://Targyak.gd" type="Script" id=2]
+[ext_resource path="res://kocka.png" type="Texture" id=3]
+[ext_resource path="res://key.png" type="Texture" id=4]
+[ext_resource path="res://Kulcs.gd" type="Script" id=5]
+[ext_resource path="res://bucket.png" type="Texture" id=6]
+[ext_resource path="res://blue paint.png" type="Texture" id=8]
+[ext_resource path="res://rongy.png" type="Texture" id=9]
+[ext_resource path="res://Bucket.gd" type="Script" id=10]
+[ext_resource path="res://blue paint.gd" type="Script" id=11]
+[ext_resource path="res://rongy.gd" type="Script" id=12]
+[ext_resource path="res://targy_felvesz.wav" type="AudioStream" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23.4164, 16.5967 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 23.1546
+height = 23.103
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 26.7396, 25.807 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 27.0546, 25.807 )
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 21.125
+height = 17.5288
+
+[node name="Targyak" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Kocka" type="Area2D" parent="."]
+position = Vector2( 469.711, 272.947 )
+z_index = 2
+z_as_relative = false
+collision_mask = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Kocka"]
+z_index = 7
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kocka"]
+shape = SubResource( 1 )
+
+[node name="Kockapos" type="Position2D" parent="Kocka"]
+position = Vector2( 873.155, 385.187 )
+
+[node name="Kulcs" type="Area2D" parent="."]
+position = Vector2( 560.666, 172.384 )
+z_index = 2
+z_as_relative = false
+collision_mask = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Kulcs"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kulcs"]
+position = Vector2( -0.944923, 7.62939e-06 )
+rotation = 0.785398
+shape = SubResource( 2 )
+
+[node name="Kulcspos" type="Position2D" parent="Kulcs"]
+position = Vector2( 1584.02, 1108.34 )
+
+[node name="Bucket" type="Area2D" parent="."]
+position = Vector2( 473.3, 360.423 )
+z_index = 2
+z_as_relative = false
+collision_mask = 2
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Bucket"]
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket"]
+position = Vector2( -0.944931, 2.20486 )
+shape = SubResource( 3 )
+
+[node name="bucketpos" type="Position2D" parent="Bucket"]
+position = Vector2( 1436.56, 164.111 )
+
+[node name="bluepaint" type="Area2D" parent="."]
+position = Vector2( 383.434, 516.806 )
+z_index = 2
+z_as_relative = false
+collision_mask = 2
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="bluepaint"]
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bluepaint"]
+position = Vector2( -0.944939, 2.20486 )
+shape = SubResource( 4 )
+
+[node name="bluepaintpos" type="Position2D" parent="bluepaint"]
+position = Vector2( 1889.01, 1127.06 )
+
+[node name="rongy" type="Area2D" parent="."]
+position = Vector2( 293.702, 511.048 )
+z_index = 2
+z_as_relative = false
+collision_mask = 2
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="rongy"]
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rongy"]
+position = Vector2( 3.1498, -3.46477 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="rongypos" type="Position2D" parent="rongy"]
+position = Vector2( 1006.07, 932.338 )
+
+[node name="targyfelvesz" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[connection signal="body_entered" from="Kocka" to="Kocka" method="_on_Kocka_body_entered"]
+[connection signal="body_entered" from="Kulcs" to="Kulcs" method="_on_Kulcs_body_entered"]
+[connection signal="body_entered" from="Bucket" to="Bucket" method="_on_Bucket_body_entered"]
+[connection signal="body_entered" from="bluepaint" to="bluepaint" method="_on_bluepaint_body_entered"]
+[connection signal="felvesz" from="bluepaint" to="." method="_on_bluepaint_felvesz"]
+[connection signal="body_entered" from="rongy" to="rongy" method="_on_rongy_body_entered"]

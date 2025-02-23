@@ -1,0 +1,49 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Palya.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Targyak.tscn" type="PackedScene" id=3]
+[ext_resource path="res://NPC.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Dialog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://maintheme.mp3" type="AudioStream" id=6]
+[ext_resource path="res://key.png" type="Texture" id=7]
+[ext_resource path="res://bucket.png" type="Texture" id=8]
+[ext_resource path="res://penz.png" type="Texture" id=9]
+[ext_resource path="res://blue paint.png" type="Texture" id=10]
+[ext_resource path="res://rongy.png" type="Texture" id=11]
+[ext_resource path="res://oldoszer.png" type="Texture" id=12]
+[ext_resource path="res://outro.tscn" type="PackedScene" id=13]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Main.gd" type="Script" id=16]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 16 )
+targyak = [ "bluepaint", "bucket", "kulcs", "penz", "rongy", "oldoszer" ]
+kepek = [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ) ]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 294.865, 416.451 )
+
+[node name="Palya" parent="." instance=ExtResource( 2 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="Targyak" parent="." instance=ExtResource( 3 )]
+
+[node name="NPC" parent="." instance=ExtResource( 4 )]
+
+[node name="Dialog" parent="." instance=ExtResource( 5 )]
+
+[node name="HUD" parent="." instance=ExtResource( 14 )]
+
+[node name="outro" parent="." instance=ExtResource( 13 )]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="outro" from="." to="outro" method="_on_Main_outro"]
+[connection signal="painterisblue" from="Targyak" to="outro" method="_on_Targyak_painterisblue"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
